@@ -26,11 +26,11 @@
     socket.on('winner', (msg) => {
       console.log(msg)
       if (msg === 'null') {
-        result.value = 'Draw'
+        result.textContent = 'Draw'
       } else if (msg === id) {
-        result.value = 'Winner'
+        result.textContent = 'Winner'
       } else {
-        result.value = 'Loser'
+        result.textContent = 'Loser'
       }
     });
   </script>
