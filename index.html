@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <button onclick="play(this)" value="rock">Rock</button>
+  <button onclick="play(this)" value="paper">Paper</button>
+  <button onclick="play(this)" value="scissors">Scisors</button>
+  <label id="result"></label>
+
+  <script src="/socket.io/socket.io.js"></script>
+  <script>
+    const id = Math.floor(Math.random()*1000)
+
+    const socket = io();
+
+    const result = document.getElementById('result');
+
+    const play = (button) => {
+      socket.emit('choice', {id, choice: button.value});
+    }
+
+    socket.on('winner', (msg) => {
+      console.log(msg)
+      if (msg === 'null') {
+        result.value = 'Draw'
+      } else if (msg === id) {
+        result.value = 'Winner'
+      } else {
+        result.value = 'Loser'
+      }
+    });
+  </script>
+</body>
+</html>
